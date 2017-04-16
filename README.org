@@ -4,6 +4,19 @@ This is a little side project I started to get more familiar with my current lan
 ** Features
 None. Yet.
 
+*** Tasks
+
+**** TODO Make recipe calls more consistent
+
+***** TODO Generate alternate ingredient lists
+
+***** TODO Retry with alternate ingredient list on no results
+
+***** TODO Improve ingredient list generation
+
+**** TODO Cache ingredient list -> recipe results
+
+**** TODO Build a nice UI
 ** Is it Good?
 [[https://github.com/glenjamin/node-fib#is-it-any-good][Yes]]. [[https://news.ycombinator.com/item?id=3067434][Yes]] it is.
 
