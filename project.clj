@@ -11,6 +11,7 @@
                  [ring "1.5.0"]
                  [compojure "1.5.1"]
                  [clj-http "3.4.1"]
+                 [clojure-opennlp "0.3.3"]
                  [figwheel-sidecar "0.5.9"]
                  [org.omcljs/om "1.0.0-alpha47"]
                  [com.stuartsierra/component "0.3.1"]
