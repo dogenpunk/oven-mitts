@@ -1,6 +1,7 @@
-(ns oven-mitts.api-requests
+(ns oven-mitts.backend.api-requests
   (:require [clj-http.client :as client]
-            [clojure.data.json :as json])
+            [clojure.data.json :as json]
+            [oven-mitts.backend.nlp :as nlp])
   (:import [java.net URLEncoder]))
 
 (def punk-api-url
@@ -40,14 +41,20 @@
   (let [url  (str punk-api-url "/beers?beer_name=" name)]
     (punk-api-get-request url)))
 
+(defn get-recipe-by-foods [foods]
+  (let [food-query (clojure.string/join "," foods)]
+    (future (client/get recipe-puppy-api-url
+                        {:as :json
+                         :query-params {"q" food-query}
+                         :throw-exceptions false}))))
+
 (defn get-random-beer-and-food-pairing
   []
   (let [random-beer (first (get-random-beer))
-        food-query (URLEncoder/encode (first (:food_pairing random-beer)) "UTF-8")
-        response (future (client/get (str recipe-puppy-api-url "?q=" food-query)
-                                     {:as :json
-                                      :throw-exceptions false}))]
+        food-query  (nlp/generate-ingredient-list (first (:food_pairing random-beer)))
+        response    (get-recipe-by-foods food-query)]
     {:beer random-beer
+     :food-query food-query
      :recipe (-> @response
                  :body
                  (json->map)

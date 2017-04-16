@@ -1,4 +1,4 @@
-(ns oven-mitts.nlp
+(ns oven-mitts.backend.nlp
   (:require [opennlp.nlp :as nlp]))
 
 (def tokenize (nlp/make-tokenizer "resources/models/en-token.bin"))
